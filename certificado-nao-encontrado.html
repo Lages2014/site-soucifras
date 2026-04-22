@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certificado não encontrado — Sou Cifras</title>
+<meta name="description" content="O código de verificação informado não corresponde a nenhum registro em nossa blockchain.">
+<meta name="robots" content="noindex">
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #08080d;
+    --bg-2: #0e0e16;
+    --gold: #e8a920;
+    --gold-dim: #a87718;
+    --gold-light: #f4c257;
+    --red: #ef4444;
+    --red-glow: rgba(239, 68, 68, 0.15);
+    --text: #f0f0f8;
+    --text-dim: #8a8a95;
+    --text-muted: #4a4a55;
+    --border: rgba(232, 169, 32, 0.15);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+    display: flex; flex-direction: column;
+  }
+
+  nav {
+    padding: 24px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(8, 8, 13, 0.7);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    display: flex; align-items: center; gap: 12px;
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px; letter-spacing: -0.02em;
+    text-decoration: none; color: var(--text);
+  }
+  .logo-mark {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: linear-gradient(135deg, #f4c257 0%, #e8a920 40%, #a87718 100%);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(232, 169, 32, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+  }
+  .logo-mark svg { width: 20px; height: 20px; fill: #fff; }
+  .nav-cta {
+    padding: 10px 24px; border: 1px solid var(--gold); color: var(--gold);
+    text-decoration: none; font-size: 13px; letter-spacing: 0.05em;
+    text-transform: uppercase; border-radius: 100px; transition: all 0.3s;
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--bg); }
+
+  main {
+    flex: 1;
+    padding: 80px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  main::before {
+    content: '';
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 900px; height: 900px;
+    background: radial-gradient(circle, var(--red-glow) 0%, transparent 60%);
+    filter: blur(80px); z-index: -1; opacity: 0.4;
+  }
+
+  .error-card {
+    max-width: 640px; width: 100%;
+    text-align: center;
+    background: linear-gradient(180deg, rgba(239, 68, 68, 0.03), transparent);
+    border: 1px solid rgba(239, 68, 68, 0.15);
+    border-radius: 32px;
+    padding: 80px 48px;
+    backdrop-filter: blur(10px);
+  }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 100px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 40px;
+  }
+  .status-badge::before {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--red);
+    box-shadow: 0 0 12px var(--red);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .error-icon {
+    width: 120px; height: 120px;
+    margin: 0 auto 40px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.02));
+    border: 2px solid rgba(239, 68, 68, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .error-icon svg {
+    width: 52px; height: 52px;
+    stroke: var(--red);
+    fill: none;
+    stroke-width: 2;
+  }
+
+  h1 {
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+  }
+  h1 em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    color: var(--red);
+    opacity: 0.9;
+    font-weight: 400;
+  }
+
+  .description {
+    font-size: 18px;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+  }
+
+  .description strong { color: var(--text); font-weight: 500; }
+
+  .hash-box {
+    margin: 32px 0;
+    padding: 16px 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--text-muted);
+    word-break: break-all;
+    text-align: left;
+  }
+  .hash-box .label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 8px;
+  }
+
+  .possible-reasons {
+    margin: 40px 0;
+    text-align: left;
+    background: rgba(232, 169, 32, 0.03);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+  }
+  .possible-reasons h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .possible-reasons ul {
+    list-style: none;
+    padding: 0;
+  }
+  .possible-reasons li {
+    padding: 12px 0 12px 28px;
+    position: relative;
+    color: var(--text-dim);
+    font-size: 15px;
+    border-bottom: 1px solid var(--border);
+  }
+  .possible-reasons li:last-child { border-bottom: none; }
+  .possible-reasons li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .search-box {
+    margin: 40px 0;
+  }
+  .search-box label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    text-align: left;
+  }
+  .search-input {
+    display: flex;
+    gap: 12px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 6px;
+    transition: border-color 0.3s;
+  }
+  .search-input:focus-within {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(232, 169, 32, 0.1);
+  }
+  .search-input input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    padding: 14px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    outline: none;
+  }
+  .search-input input::placeholder { color: var(--text-muted); }
+  .search-input button {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #f4c257, #e8a920);
+    color: var(--bg);
+    border: none;
+    border-radius: 8px;
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .search-input button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(232, 169, 32, 0.4);
+  }
+
+  .actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+  }
+  .btn-primary, .btn-secondary {
+    padding: 16px 36px;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 100px;
+    transition: all 0.3s;
+    display: inline-block;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, #f4c257, #e8a920);
+    color: var(--bg);
+    font-weight: 500;
+    box-shadow: 0 8px 30px rgba(232, 169, 32, 0.3);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(232, 169, 32, 0.5); }
+  .btn-secondary { border: 1px solid var(--gold); color: var(--gold); }
+  .btn-secondary:hover { background: var(--gold); color: var(--bg); }
+
+  footer {
+    padding: 40px 60px;
+    border-top: 1px solid var(--border);
+    background: var(--bg-2);
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 20px 24px; }
+    main { padding: 40px 20px; }
+    .error-card { padding: 48px 24px; border-radius: 24px; }
+    .error-icon { width: 96px; height: 96px; }
+    .error-icon svg { width: 40px; height: 40px; }
+    .possible-reasons { padding: 24px 20px; }
+    .search-input { flex-direction: column; padding: 12px; gap: 10px; }
+    .search-input button { width: 100%; }
+    footer { padding: 30px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+    </div>
+    <span>Sou Cifras</span>
+  </a>
+  <a href="/" class="nav-cta">Voltar ao início</a>
+</nav>
+
+<main>
+  <div class="error-card">
+
+    <div class="status-badge">
+      Não encontrado
+    </div>
+
+    <div class="error-icon">
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" stroke-linecap="round"/>
+        <line x1="15" y1="9" x2="9" y2="15" stroke-linecap="round"/>
+        <line x1="9" y1="9" x2="15" y2="15" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <h1>Certificado <em>não encontrado.</em></h1>
+
+    <p class="description">
+      O código de verificação informado <strong>não corresponde</strong> a nenhum registro em nossa blockchain.
+    </p>
+
+    <div class="hash-box" id="hashBox" style="display:none;">
+      <span class="label">Código consultado</span>
+      <span id="hashValue"></span>
+    </div>
+
+    <div class="possible-reasons">
+      <h3>Possíveis motivos</h3>
+      <ul>
+        <li>O código foi digitado incorretamente — verifique se está completo e sem espaços.</li>
+        <li>O QR Code foi escaneado de forma parcial — tente escanear novamente com melhor iluminação.</li>
+        <li>O certificado pode ser falsificado — registros autênticos do Sou Cifras sempre aparecem nesta consulta.</li>
+        <li>O registro ainda está sendo processado — aguarde alguns minutos e tente novamente.</li>
+      </ul>
+    </div>
+
+    <div class="search-box">
+      <label for="searchInput">Tentar outro código de verificação</label>
+      <div class="search-input">
+        <input type="text" id="searchInput" placeholder="Cole o código de verificação (tx hash)..." autocomplete="off">
+        <button onclick="verificar()">Verificar</button>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a href="/" class="btn-primary">Página inicial</a>
+      <a href="/faq.html" class="btn-secondary">Como funciona</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  © 2026 Sou Cifras · MP 2.200-2/2001 · Lei 9.610/98 · Convenção de Berna
+</footer>
+
+<script>
+  // Se a URL tem um hash na rota (ex: /verificar/ABC123), mostra na tela
+  const path = window.location.pathname;
+  const match = path.match(/\/verificar\/(.+)$/);
+  if (match && match[1]) {
+    document.getElementById('hashValue').textContent = decodeURIComponent(match[1]);
+    document.getElementById('hashBox').style.display = 'block';
+  }
+
+  function verificar() {
+    const input = document.getElementById('searchInput').value.trim();
+    if (!input) {
+      alert('Digite um código de verificação.');
+      return;
+    }
+    window.location.href = '/verificar/' + encodeURIComponent(input);
+  }
+
+  document.getElementById('searchInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') verificar();
+  });
+</script>
+
+</body>
+</html>

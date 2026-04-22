@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perguntas frequentes — Sou Cifras</title>
+<meta name="description" content="Tire suas dúvidas sobre registro de obras musicais, validade jurídica, blockchain, preços e uso do Sou Cifras.">
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://soucifras.com.br/faq.html">
+<meta property="og:title" content="Perguntas frequentes — Sou Cifras">
+<meta property="og:description" content="Tire suas dúvidas sobre registro de obras musicais, validade jurídica, blockchain e muito mais.">
+<meta property="og:image" content="https://soucifras.com.br/og-image.png">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #08080d;
+    --bg-2: #0e0e16;
+    --gold: #e8a920;
+    --gold-dim: #a87718;
+    --gold-light: #f4c257;
+    --text: #f0f0f8;
+    --text-dim: #8a8a95;
+    --text-muted: #4a4a55;
+    --border: rgba(232, 169, 32, 0.15);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    padding: 24px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    z-index: 100;
+    background: rgba(8, 8, 13, 0.7);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    display: flex; align-items: center; gap: 12px;
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px; letter-spacing: -0.02em;
+    text-decoration: none; color: var(--text);
+  }
+  .logo-mark {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: linear-gradient(135deg, #f4c257 0%, #e8a920 40%, #a87718 100%);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(232, 169, 32, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+  }
+  .logo-mark svg { width: 20px; height: 20px; fill: #fff; }
+  .nav-links { display: flex; gap: 40px; font-size: 14px; }
+  .nav-links a { color: var(--text-dim); text-decoration: none; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    padding: 10px 24px; border: 1px solid var(--gold); color: var(--gold);
+    text-decoration: none; font-size: 13px; letter-spacing: 0.05em;
+    text-transform: uppercase; border-radius: 100px; transition: all 0.3s;
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--bg); box-shadow: 0 0 30px rgba(232, 169, 32, 0.4); }
+
+  .page-header {
+    padding: 180px 60px 80px;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .page-header::before {
+    content: '';
+    position: absolute; top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(232, 169, 32, 0.06) 0%, transparent 60%);
+    filter: blur(60px); z-index: -1;
+  }
+  .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.3em; color: var(--gold);
+    margin-bottom: 24px;
+  }
+  .page-header h1 {
+    font-size: clamp(48px, 7vw, 96px);
+    font-weight: 300; line-height: 1.05;
+    letter-spacing: -0.03em; margin-bottom: 24px;
+  }
+  .page-header h1 em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic; color: var(--gold-light); font-weight: 400;
+  }
+  .page-header p {
+    font-size: 19px; color: var(--text-dim);
+    max-width: 620px; margin: 0 auto;
+  }
+
+  .faq-section {
+    max-width: 900px; margin: 0 auto;
+    padding: 40px 60px 120px;
+  }
+  .faq-category {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.3em;
+    color: var(--gold); text-transform: uppercase;
+    margin: 60px 0 24px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .faq-category:first-child { margin-top: 0; }
+
+  details {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.3s;
+  }
+  details[open] { background: rgba(232, 169, 32, 0.02); }
+  summary {
+    padding: 28px 24px 28px 0;
+    font-size: 20px; font-weight: 400;
+    cursor: pointer; list-style: none;
+    display: flex; justify-content: space-between;
+    align-items: center; gap: 24px;
+    transition: color 0.3s;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary:hover { color: var(--gold-light); }
+  summary::after {
+    content: '+';
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 24px; color: var(--gold);
+    flex-shrink: 0; transition: transform 0.3s;
+  }
+  details[open] summary::after { content: '−'; transform: rotate(180deg); }
+  .faq-answer {
+    padding: 0 24px 32px 0;
+    color: var(--text-dim); font-size: 16px;
+    line-height: 1.8;
+  }
+  .faq-answer p { margin-bottom: 12px; }
+  .faq-answer p:last-child { margin-bottom: 0; }
+  .faq-answer strong { color: var(--text); font-weight: 500; }
+  .faq-answer a { color: var(--gold); text-decoration: none; border-bottom: 1px dotted var(--gold-dim); }
+  .faq-answer a:hover { color: var(--gold-light); }
+  .faq-answer code {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--gold-light); font-size: 14px;
+    background: rgba(232, 169, 32, 0.08);
+    padding: 2px 8px; border-radius: 4px;
+  }
+
+  .cta-box {
+    margin: 80px 0 0;
+    padding: 60px 40px;
+    background: linear-gradient(135deg, rgba(232, 169, 32, 0.05), rgba(232, 169, 32, 0.01));
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    text-align: center;
+  }
+  .cta-box h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 42px; font-weight: 400;
+    margin-bottom: 16px; letter-spacing: -0.02em;
+  }
+  .cta-box p { color: var(--text-dim); margin-bottom: 32px; font-size: 17px; }
+  .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary, .btn-secondary {
+    padding: 16px 36px; font-size: 14px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    text-decoration: none; border-radius: 100px;
+    transition: all 0.3s; display: inline-block;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, #f4c257, #e8a920);
+    color: var(--bg); font-weight: 500;
+    box-shadow: 0 8px 30px rgba(232, 169, 32, 0.3);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(232, 169, 32, 0.5); }
+  .btn-secondary { border: 1px solid var(--gold); color: var(--gold); }
+  .btn-secondary:hover { background: var(--gold); color: var(--bg); }
+
+  footer {
+    padding: 60px 60px 40px;
+    border-top: 1px solid var(--border);
+    background: var(--bg-2);
+  }
+  .footer-bottom {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--text-muted);
+    letter-spacing: 0.05em; flex-wrap: wrap; gap: 16px;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    .page-header { padding: 140px 24px 60px; }
+    .faq-section { padding: 20px 24px 80px; }
+    summary { font-size: 17px; padding: 24px 16px 24px 0; }
+    .cta-box { padding: 40px 24px; }
+    .cta-box h2 { font-size: 32px; }
+    footer { padding: 60px 24px 30px; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+    </div>
+    <span>Sou Cifras</span>
+  </a>
+  <div class="nav-links">
+    <a href="/#como">Como funciona</a>
+    <a href="/#recursos">Recursos</a>
+    <a href="/#planos">Planos</a>
+    <a href="/faq.html">FAQ</a>
+  </div>
+  <a href="/#baixar" class="nav-cta">Baixar app</a>
+</nav>
+
+<header class="page-header">
+  <div class="kicker">— PERGUNTAS FREQUENTES —</div>
+  <h1>Todas as <em>respostas.</em></h1>
+  <p>Tudo o que você precisa saber sobre como o Sou Cifras protege suas obras musicais com validade jurídica reconhecida.</p>
+</header>
+
+<section class="faq-section">
+
+  <div class="faq-category">Sobre o registro</div>
+
+  <details>
+    <summary>O Sou Cifras tem validade jurídica no Brasil?</summary>
+    <div class="faq-answer">
+      <p>Sim. Os registros do Sou Cifras têm <strong>validade jurídica plena</strong> no Brasil e em mais de 170 países signatários da Convenção de Berna.</p>
+      <p>O sistema é amparado pela <strong>MP 2.200-2/2001</strong> (que dá validade a documentos eletrônicos), pelo <strong>Art. 411 II do CPC</strong> (documentos eletrônicos como prova), pela <strong>Lei 9.610/98</strong> (Lei de Direitos Autorais) e pela <strong>Lei 14.063/2020</strong> (assinaturas eletrônicas).</p>
+      <p>Existe inclusive precedente no TJSP (processo 2237253-77.2018.8.26.0000) reconhecendo esse tipo de registro.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Como funciona o registro da minha música?</summary>
+    <div class="faq-answer">
+      <p>Você faz o upload do arquivo da sua composição pelo app. O sistema gera um <strong>hash SHA-256</strong> (uma "impressão digital" única) do arquivo e registra esse hash na blockchain Polygon.</p>
+      <p>O arquivo original fica armazenado de forma descentralizada no IPFS. Você recebe um certificado digital em PDF com todos os dados técnicos, fundamentação legal e um QR Code que permite a qualquer pessoa verificar a autenticidade do registro.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Preciso ser compositor profissional pra registrar?</summary>
+    <div class="faq-answer">
+      <p>Não. Qualquer pessoa pode registrar suas obras — compositores iniciantes, amadores, estudantes, bandas, produtores. A Lei 9.610/98 protege <strong>todo autor</strong> desde o momento da criação, independente de profissão ou experiência.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Posso registrar uma música em coautoria?</summary>
+    <div class="faq-answer">
+      <p>Sim. Você pode adicionar múltiplos coautores no registro, com <strong>porcentagens personalizadas</strong> de participação para cada um (letra, melodia, arranjo, produção).</p>
+      <p>Todos os coautores recebem notificação por email e podem baixar uma cópia do certificado.</p>
+    </div>
+  </details>
+
+  <div class="faq-category">Blockchain e tecnologia</div>
+
+  <details>
+    <summary>Por que blockchain? Não basta um cartório?</summary>
+    <div class="faq-answer">
+      <p>Blockchain oferece três vantagens sobre o cartório tradicional:</p>
+      <p><strong>1. Imutabilidade:</strong> uma vez registrado, ninguém (nem mesmo nós) pode alterar ou apagar o registro.</p>
+      <p><strong>2. Preço:</strong> custa uma fração do valor cobrado por registros tradicionais.</p>
+      <p><strong>3. Verificação pública:</strong> qualquer pessoa pode confirmar a autenticidade sem precisar entrar em contato conosco.</p>
+      <p>Importante: o registro blockchain <strong>não substitui</strong> o cartório — ele o complementa e serve como prova juridicamente válida.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>O que acontece com meu registro se o Sou Cifras sair do ar?</summary>
+    <div class="faq-answer">
+      <p>Seu registro <strong>continua existindo</strong> mesmo que o Sou Cifras deixe de operar. Isso é possível porque o hash da sua obra está gravado na blockchain Polygon, que é uma rede pública e descentralizada. Seu arquivo está no IPFS, também descentralizado.</p>
+      <p>O certificado PDF que você baixa contém todas as informações técnicas necessárias para provar a autenticidade em qualquer lugar do mundo, a qualquer momento.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Como alguém verifica a autenticidade de um registro?</summary>
+    <div class="faq-answer">
+      <p>O certificado contém um <strong>QR Code</strong> e um link de verificação no formato <code>soucifras.com.br/verificar/TXHASH</code>.</p>
+      <p>Ao escanear ou acessar o link, qualquer pessoa (juiz, advogado, produtora, gravadora) vê imediatamente os dados da obra, autores, hash e a confirmação de que o registro é autêntico — tudo consultado diretamente na blockchain.</p>
+    </div>
+  </details>
+
+  <div class="faq-category">Preços e planos</div>
+
+  <details>
+    <summary>Quanto custa registrar uma obra?</summary>
+    <div class="faq-answer">
+      <p>O registro individual de uma obra custa <strong>R$ 74,90</strong> e inclui: registro permanente na blockchain, armazenamento no IPFS, certificado digital em PDF, QR Code de verificação e notificação dos coautores.</p>
+      <p>Se você registra muitas obras, vale a pena o plano <strong>Premium (R$ 84,90/mês)</strong> com registros ilimitados, ou o <strong>Pro (R$ 164,90/mês)</strong> com recursos adicionais para profissionais e gravadoras.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Existe plano gratuito?</summary>
+    <div class="faq-answer">
+      <p>Sim. No plano gratuito você pode <strong>descobrir cifras</strong>, explorar o catálogo e aprender música. O registro de obras é cobrado separadamente, ou liberado via plano Premium/Pro.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Posso cancelar a assinatura quando quiser?</summary>
+    <div class="faq-answer">
+      <p>Sim, sem multa e sem taxa de cancelamento. As obras que você já registrou <strong>continuam protegidas para sempre</strong>, independente de você manter a assinatura ativa.</p>
+    </div>
+  </details>
+
+  <div class="faq-category">Privacidade e dados</div>
+
+  <details>
+    <summary>Quem pode ver o conteúdo da minha música?</summary>
+    <div class="faq-answer">
+      <p>Apenas você e os coautores que você escolher. O arquivo da sua música é armazenado de forma privada, e o certificado público mostra apenas metadados (título, tipo, autores, data, hash) — <strong>nunca o conteúdo da obra</strong>.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Meus dados estão seguros? E a LGPD?</summary>
+    <div class="faq-answer">
+      <p>Sim. Cumprimos integralmente a <strong>Lei Geral de Proteção de Dados (LGPD)</strong>. Seus dados pessoais são criptografados, nunca vendidos e você pode solicitar exclusão, correção ou portabilidade a qualquer momento pelo app.</p>
+    </div>
+  </details>
+
+  <div class="faq-category">Suporte</div>
+
+  <details>
+    <summary>Como falar com o suporte?</summary>
+    <div class="faq-answer">
+      <p>Você pode entrar em contato pelo email <a href="mailto:contato@soucifras.com.br">contato@soucifras.com.br</a> ou pelo chat dentro do próprio app.</p>
+      <p>O tempo médio de resposta é de algumas horas em dias úteis.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>E se eu esquecer minha senha ou perder acesso à conta?</summary>
+    <div class="faq-answer">
+      <p>Você pode recuperar o acesso pelo email cadastrado na hora do cadastro. Seus registros ficam vinculados à sua conta e à blockchain, então <strong>nunca se perdem</strong> — mesmo em caso de problemas com a conta, os certificados já baixados continuam válidos.</p>
+    </div>
+  </details>
+
+  <div class="cta-box">
+    <h2>Ainda com dúvida?</h2>
+    <p>Nossa equipe responde em poucas horas. Ou baixe o app e comece agora mesmo.</p>
+    <div class="cta-buttons">
+      <a href="mailto:contato@soucifras.com.br" class="btn-primary">Falar com suporte</a>
+      <a href="/#baixar" class="btn-secondary">Baixar app</a>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  <div class="footer-bottom">
+    <span>© 2026 Sou Cifras — Registro de Propriedade Intelectual Musical</span>
+    <span>MP 2.200-2/2001 · Lei 9.610/98 · Convenção de Berna</span>
+  </div>
+</footer>
+
+</body>
+</html>
