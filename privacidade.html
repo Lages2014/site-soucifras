@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Privacidade — Sou Cifras</title>
+<meta name="description" content="Política de privacidade do Sou Cifras em conformidade com a LGPD.">
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><linearGradient id="g" x1="0%25" y1="0%25" x2="100%25" y2="100%25"><stop offset="0%25" stop-color="%23f4c257"/><stop offset="40%25" stop-color="%23e8a920"/><stop offset="100%25" stop-color="%23a87718"/></linearGradient></defs><rect width="32" height="32" rx="7" fill="url(%23g)"/><path d="M16 7v11.6c-.6-.4-1.3-.6-2-.6-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4V11h4V7h-6z" fill="white"/></svg>'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #08080d; --bg-2: #0e0e16; --gold: #e8a920; --gold-dim: #a87718;
+    --gold-light: #f4c257; --text: #f0f0f8; --text-dim: #8a8a95;
+    --text-muted: #4a4a55; --border: rgba(232, 169, 32, 0.15);
+    --border-bright: rgba(232, 169, 32, 0.35);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Fraunces', Georgia, serif; font-weight: 300;
+    -webkit-font-smoothing: antialiased; line-height: 1.7;
+  }
+  body::before {
+    content: ''; position: fixed; top: -20%; left: 50%;
+    transform: translateX(-50%); width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(232, 169, 32, 0.05) 0%, transparent 60%);
+    filter: blur(80px); pointer-events: none; z-index: 0;
+  }
+  nav {
+    position: sticky; top: 0; padding: 24px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(8, 8, 13, 0.8); backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border); z-index: 100;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 12px;
+    font-family: 'Instrument Serif', serif; font-size: 22px;
+    text-decoration: none; color: var(--text);
+  }
+  .logo-mark {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: linear-gradient(135deg, #f4c257 0%, #e8a920 40%, #a87718 100%);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(232, 169, 32, 0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+  }
+  .logo-mark svg { width: 20px; height: 20px; fill: #fff; }
+  .nav-link {
+    color: var(--text-dim); text-decoration: none; font-size: 14px;
+    transition: color 0.3s;
+  }
+  .nav-link:hover { color: var(--gold); }
+  .hero {
+    padding: 100px 60px 60px; text-align: center;
+    position: relative; z-index: 1;
+  }
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.3em;
+    color: var(--gold); margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(40px, 7vw, 80px); line-height: 0.95;
+    letter-spacing: -0.03em; margin-bottom: 24px;
+  }
+  .hero h1 .italic { font-style: italic; color: var(--gold); }
+  .hero-meta {
+    color: var(--text-dim); font-size: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.1em;
+  }
+  .container {
+    max-width: 820px; margin: 0 auto; padding: 40px 60px 120px;
+    position: relative; z-index: 1;
+  }
+  h2 {
+    font-family: 'Instrument Serif', serif; font-size: 36px;
+    margin-top: 64px; margin-bottom: 24px; line-height: 1.2;
+    color: var(--text);
+  }
+  h2 .italic { font-style: italic; color: var(--gold); }
+  h2:first-child { margin-top: 0; }
+  h3 {
+    font-family: 'Instrument Serif', serif; font-size: 22px;
+    margin-top: 40px; margin-bottom: 16px; color: var(--text);
+  }
+  p {
+    color: var(--text-dim); font-size: 16px; line-height: 1.8;
+    margin-bottom: 20px;
+  }
+  p strong, li strong { color: var(--text); font-weight: 400; }
+  ul, ol {
+    margin-bottom: 24px; padding-left: 24px;
+    color: var(--text-dim);
+  }
+  li {
+    font-size: 16px; line-height: 1.8; margin-bottom: 12px;
+  }
+  li::marker { color: var(--gold); }
+  .highlight {
+    padding: 32px; background: var(--bg-2);
+    border-left: 3px solid var(--gold); border-radius: 8px;
+    margin: 32px 0;
+  }
+  .highlight p:last-child { margin-bottom: 0; }
+  .info-box {
+    padding: 24px 32px; background: rgba(232, 169, 32, 0.05);
+    border: 1px solid var(--border); border-radius: 12px;
+    margin: 32px 0;
+  }
+  .info-box h4 {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.2em;
+    color: var(--gold); margin-bottom: 12px;
+  }
+  .info-box p { margin-bottom: 8px; font-size: 15px; }
+  .info-box p:last-child { margin-bottom: 0; }
+  a { color: var(--gold); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  footer {
+    padding: 40px 60px; text-align: center;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--text-muted); letter-spacing: 0.1em;
+    border-top: 1px solid var(--border);
+    position: relative; z-index: 1;
+  }
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .hero { padding: 60px 24px 40px; }
+    .container { padding: 24px 24px 80px; }
+    h2 { font-size: 28px; }
+    h3 { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+    </div>
+    <span>Sou Cifras</span>
+  </a>
+  <a href="/" class="nav-link">← Voltar ao site</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-label">— Em conformidade com a LGPD</div>
+  <h1>Política de <span class="italic">privacidade.</span></h1>
+  <div class="hero-meta">Última atualização: 22 de abril de 2026</div>
+</section>
+
+<div class="container">
+
+<div class="highlight">
+<p>No Sou Cifras levamos sua privacidade a sério. Esta política explica de forma clara <strong>quais dados coletamos, como usamos, com quem compartilhamos e quais são seus direitos</strong>.</p>
+<p>Se tiver qualquer dúvida, entre em contato: <a href="mailto:contato@soucifras.com.br">contato@soucifras.com.br</a></p>
+</div>
+
+<h2>1. Quem <span class="italic">somos.</span></h2>
+<p>O Sou Cifras é uma plataforma brasileira de registro de obras musicais e análise de músicas por inteligência artificial. Operamos sob a legislação brasileira, especialmente a <strong>Lei Geral de Proteção de Dados (Lei 13.709/2018 — LGPD)</strong>.</p>
+
+<h2>2. Quais dados <span class="italic">coletamos.</span></h2>
+
+<h3>2.1 Dados fornecidos por você</h3>
+<ul>
+<li><strong>Cadastro:</strong> nome, email, senha criptografada</li>
+<li><strong>Perfil:</strong> foto (opcional), informações musicais</li>
+<li><strong>Verificação de identidade:</strong> CPF, documento oficial (RG/CNH/Passaporte), selfie com detecção de vida</li>
+<li><strong>Pagamentos:</strong> processados por parceiro certificado. Não armazenamos dados de cartão.</li>
+<li><strong>Obras musicais:</strong> arquivos de áudio, letras, partituras e metadados que você envia</li>
+<li><strong>Co-autores:</strong> nome, email e porcentagem de participação declarados por você</li>
+</ul>
+
+<h3>2.2 Dados coletados automaticamente</h3>
+<ul>
+<li>Endereço IP e dados do dispositivo</li>
+<li>Logs de acesso e uso do aplicativo</li>
+<li>Cookies e identificadores anônimos (no site)</li>
+</ul>
+
+<h2>3. Como <span class="italic">usamos</span> seus dados.</h2>
+<ul>
+<li><strong>Prestar o serviço:</strong> criar registros de obras, emitir certificados, processar análises</li>
+<li><strong>Verificar identidade:</strong> garantir que apenas o verdadeiro autor registre a obra</li>
+<li><strong>Notificar co-autores:</strong> informar por email sobre registros em que estão incluídos</li>
+<li><strong>Suporte ao cliente:</strong> responder dúvidas e resolver problemas</li>
+<li><strong>Melhorar a plataforma:</strong> análise agregada e anônima de uso</li>
+<li><strong>Cumprir obrigações legais:</strong> quando exigido por lei ou ordem judicial</li>
+</ul>
+
+<h2>4. Compartilhamento <span class="italic">com terceiros.</span></h2>
+
+<p>Compartilhamos dados estritamente necessários com prestadores de serviço:</p>
+
+<ul>
+<li><strong>Processador de pagamentos:</strong> para processar assinaturas e registros avulsos</li>
+<li><strong>Serviço de verificação de identidade:</strong> para verificação biométrica segura</li>
+<li><strong>Servidores de armazenamento:</strong> hospedagem criptografada dos arquivos</li>
+<li><strong>Rede descentralizada:</strong> apenas o hash criptográfico da obra (não o conteúdo)</li>
+<li><strong>Sistema de email:</strong> para notificar co-autores e suporte</li>
+</ul>
+
+<div class="info-box">
+<h4>Importante</h4>
+<p>Todos os parceiros seguem rigorosos padrões internacionais de segurança e privacidade. <strong>Nunca vendemos seus dados</strong> para fins publicitários ou comerciais.</p>
+</div>
+
+<h2>5. Seus <span class="italic">direitos</span> pela LGPD.</h2>
+<p>Como titular de dados, você tem direito a:</p>
+<ol>
+<li><strong>Acesso:</strong> saber quais dados temos sobre você</li>
+<li><strong>Correção:</strong> corrigir dados incompletos ou desatualizados</li>
+<li><strong>Exclusão:</strong> solicitar apagamento dos seus dados</li>
+<li><strong>Portabilidade:</strong> receber seus dados em formato estruturado</li>
+<li><strong>Revogação:</strong> retirar consentimento a qualquer momento</li>
+<li><strong>Oposição:</strong> opor-se ao tratamento em certos casos</li>
+<li><strong>Informação:</strong> saber com quem compartilhamos seus dados</li>
+</ol>
+
+<p>Para exercer esses direitos, envie email para <a href="mailto:contato@soucifras.com.br">contato@soucifras.com.br</a>. Respondemos em até 15 dias.</p>
+
+<div class="info-box">
+<h4>Exceção — Registros em rede descentralizada</h4>
+<p>Os hashes criptográficos das obras registrados em rede descentralizada pública são, por natureza tecnológica, <strong>imutáveis</strong>. Não é tecnicamente possível apagá-los após a confirmação. O hash, contudo, não revela o conteúdo da obra.</p>
+</div>
+
+<h2>6. Segurança dos <span class="italic">dados.</span></h2>
+<ul>
+<li>Comunicação criptografada (HTTPS/TLS)</li>
+<li>Senhas armazenadas com criptografia de alto grau</li>
+<li>Verificação biométrica processada por parceiro certificado internacionalmente</li>
+<li>Controles de acesso rígidos aos sistemas internos</li>
+<li>Backups regulares e redundantes</li>
+<li>Monitoramento contínuo de segurança</li>
+</ul>
+
+<h2>7. <span class="italic">Retenção</span> de dados.</h2>
+<p>Mantemos seus dados pelo tempo necessário para prestar o serviço e cumprir obrigações legais:</p>
+<ul>
+<li><strong>Conta ativa:</strong> dados mantidos enquanto você usar o Sou Cifras</li>
+<li><strong>Após cancelamento:</strong> dados apagados em até 60 dias, exceto obrigações legais</li>
+<li><strong>Registros de obras:</strong> mantidos permanentemente pela natureza do serviço</li>
+<li><strong>Dados de KYC:</strong> mantidos pelo prazo legal exigido (até 5 anos)</li>
+<li><strong>Logs de acesso:</strong> 6 meses, conforme Marco Civil da Internet</li>
+</ul>
+
+<h2>8. <span class="italic">Menores</span> de idade.</h2>
+<p>O Sou Cifras é destinado a pessoas com <strong>18 anos ou mais</strong>. Menores de 18 anos podem usar a plataforma apenas com autorização expressa de pais ou responsáveis legais, que assumem toda responsabilidade pelo uso.</p>
+
+<h2>9. <span class="italic">Cookies</span> e tecnologias similares.</h2>
+<p>Nosso site usa cookies essenciais para funcionamento e, em alguns casos, cookies analíticos anônimos para entender como os usuários navegam. Você pode desativá-los nas configurações do seu navegador.</p>
+
+<h2>10. Alterações nesta <span class="italic">política.</span></h2>
+<p>Podemos atualizar esta política periodicamente. Alterações significativas serão comunicadas por email ou aviso no aplicativo com <strong>pelo menos 30 dias</strong> de antecedência.</p>
+
+<h2>11. Como nos <span class="italic">contatar.</span></h2>
+
+<div class="info-box">
+<h4>Encarregado de Proteção de Dados (DPO)</h4>
+<p><strong>Email:</strong> <a href="mailto:contato@soucifras.com.br">contato@soucifras.com.br</a></p>
+<p><strong>Assunto:</strong> "LGPD — [seu pedido]"</p>
+<p><strong>Prazo de resposta:</strong> até 15 dias úteis</p>
+</div>
+
+<p>Se não ficar satisfeito com nossa resposta, você pode contatar a <strong>Autoridade Nacional de Proteção de Dados (ANPD)</strong> em <a href="https://www.gov.br/anpd" target="_blank">gov.br/anpd</a>.</p>
+
+<h2>12. Base <span class="italic">legal.</span></h2>
+<p>Esta política é regida por:</p>
+<ul>
+<li>Lei 13.709/2018 (Lei Geral de Proteção de Dados — LGPD)</li>
+<li>Lei 12.965/2014 (Marco Civil da Internet)</li>
+<li>Lei 8.078/1990 (Código de Defesa do Consumidor)</li>
+<li>Lei 9.610/1998 (Lei de Direitos Autorais)</li>
+</ul>
+
+</div>
+
+<footer>
+  <div>© 2026 Sou Cifras · Registro de Propriedade Intelectual Musical</div>
+  <div style="margin-top: 8px;"><a href="/">soucifras.com.br</a> · contato@soucifras.com.br</div>
+</footer>
+
+</body>
+</html>
