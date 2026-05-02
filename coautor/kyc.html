@@ -459,31 +459,26 @@
     // FETCH INVITATION DATA
     // =========================================================================
     async function loadInvitation(token) {
-      const url =
-        SUPABASE_URL + '/rest/v1/coauthor_invitations' +
-        '?select=' + encodeURIComponent(
-          'id,name,email,percentage,email_confirmed,kyc_status,kyc_expires_at,registration_id,registrations(title,type,profiles(nome_completo,name))'
-        ) +
-        '&kyc_invitation_token=eq.' + encodeURIComponent(token) +
-        '&limit=1';
+      const res = await fetch(
+        SUPABASE_URL + '/functions/v1/get-invitation-info',
+        {
+          method: 'POST',
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ token: token, kind: 'kyc' }),
+        }
+      );
 
-      const res = await fetch(url, {
-        headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-        },
-      });
+      const data = await res.json().catch(() => ({}));
 
-      if (!res.ok) {
-        throw new Error('Falha ao buscar convite (HTTP ' + res.status + ').');
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || 'Convite não encontrado ou já expirou.');
       }
 
-      const data = await res.json();
-      if (!Array.isArray(data) || data.length === 0) {
-        throw new Error('Convite não encontrado ou já expirado.');
-      }
-
-      return data[0];
+      return data.invitation;
     }
 
     // =========================================================================
@@ -493,13 +488,12 @@
       const firstName = (inv.name || 'Co-autor').split(/\s+/)[0];
       document.getElementById('greeting').textContent = 'Olá, ' + firstName + '!';
 
-      const reg = inv.registrations || {};
-      const author = reg.profiles || {};
-      const authorName = author.nome_completo || author.name || 'Autor';
+      const work = inv.work || {};
+      const author = inv.author || {};
 
-      document.getElementById('info-title').textContent = reg.title || '—';
-      document.getElementById('info-type').textContent = reg.type || '—';
-      document.getElementById('info-author').textContent = authorName;
+      document.getElementById('info-title').textContent = work.title || '—';
+      document.getElementById('info-type').textContent = work.type || '—';
+      document.getElementById('info-author').textContent = author.name || 'Autor';
       document.getElementById('info-percentage').textContent =
         (inv.percentage || '—') + '%';
 
