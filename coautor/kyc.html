@@ -462,7 +462,7 @@
       const url =
         SUPABASE_URL + '/rest/v1/coauthor_invitations' +
         '?select=' + encodeURIComponent(
-          'id,coauthor_name,coauthor_email,coauthor_percentage,email_confirmed,kyc_status,kyc_expires_at,registration_id,registrations(title,type,profiles(nome_completo,name))'
+          'id,name,email,percentage,email_confirmed,kyc_status,kyc_expires_at,registration_id,registrations(title,type,profiles(nome_completo,name))'
         ) +
         '&kyc_invitation_token=eq.' + encodeURIComponent(token) +
         '&limit=1';
@@ -490,7 +490,7 @@
     // RENDER FORM
     // =========================================================================
     function renderInvitation(inv) {
-      const firstName = (inv.coauthor_name || 'Co-autor').split(/\s+/)[0];
+      const firstName = (inv.name || 'Co-autor').split(/\s+/)[0];
       document.getElementById('greeting').textContent = 'Olá, ' + firstName + '!';
 
       const reg = inv.registrations || {};
@@ -501,7 +501,7 @@
       document.getElementById('info-type').textContent = reg.type || '—';
       document.getElementById('info-author').textContent = authorName;
       document.getElementById('info-percentage').textContent =
-        (inv.coauthor_percentage || '—') + '%';
+        (inv.percentage || '—') + '%';
 
       // Validações
       if (!inv.email_confirmed) {
