@@ -1,0 +1,8 @@
+# Scripts temporarios de fix
+fix-*.js
+create-vercel.js
+
+# Backups locais
+*.backup
+*.bak
+*.before-*

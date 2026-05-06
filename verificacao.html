@@ -773,12 +773,6 @@
 
   <!-- CERTIFICADO (escondido por padrão, mostra quando tem código) -->
   <div id="certificateScreen" style="display: none;">
-
-  <!-- Banner de demonstração -->
-  <div class="demo-banner">
-    ⚠ Esta é uma demonstração do layout. Em breve a verificação será feita com dados reais.
-  </div>
-
   <!-- Status de verificação -->
   <div class="seal-wrapper">
     <div class="seal">
@@ -811,71 +805,35 @@
   <div class="cert-card">
 
     <div class="cert-header">
-      <div class="cert-type">Composição Musical Completa</div>
-      <h2 class="cert-title">Salmo 91</h2>
-      <p class="cert-artist">A Sombra do Altíssimo</p>
+      <div class="cert-type" id="certType">Composição Musical Completa</div>
+      <h2 class="cert-title" id="certTitle">Salmo 91</h2>
+      <p class="cert-artist" id="certArtist" style="display:none;"></p>
     </div>
 
     <div class="data-grid">
       <div class="data-item">
-        <div class="data-label">Gênero</div>
-        <div class="data-value">Gospel / MPB</div>
+        <div class="data-label">País de origem</div>
+        <div class="data-value" id="certPais">-</div>
       </div>
       <div class="data-item">
         <div class="data-label">Data do registro</div>
-        <div class="data-value">21 de abril de 2026</div>
+        <div class="data-value" id="certData">-</div>
       </div>
       <div class="data-item">
         <div class="data-label">Horário (Brasília)</div>
-        <div class="data-value">00:14:22 · UTC-3</div>
+        <div class="data-value" id="certHora">-</div>
       </div>
       <div class="data-item">
         <div class="data-label">Status</div>
-        <div class="data-value" style="color: var(--green);">● Registrado e confirmado</div>
+        <div class="data-value" style="color: var(--green);" id="certStatus">● Registrado e confirmado</div>
       </div>
     </div>
 
     <!-- Autores -->
     <div class="authors">
       <div class="authors-title">Titulares da obra</div>
-
-      <div class="author">
-        <div class="author-info">
-          <h4>Gabriel <span class="author-role role-main">Registrante</span></h4>
-          <div class="author-meta">
-            <span>CPF ***.***.***-**</span>
-            <span>Brasil</span>
-            <span class="author-badge">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              Identidade verificada
-            </span>
-          </div>
-        </div>
-        <div class="author-pct">50%</div>
-      </div>
-
-      <div class="author">
-        <div class="author-info">
-          <h4>Cristopher <span class="author-role role-co">Co-autor</span></h4>
-          <div class="author-meta">
-            <span>CPF ***.***.***-**</span>
-            <span>Brasil</span>
-            <span style="color: var(--text-dim); font-size: 10px;">Declarado pelo registrante</span>
-          </div>
-        </div>
-        <div class="author-pct">30%</div>
-      </div>
-
-      <div class="author">
-        <div class="author-info">
-          <h4>Mario <span class="author-role role-co">Co-autor</span></h4>
-          <div class="author-meta">
-            <span>CPF ***.***.***-**</span>
-            <span>Brasil</span>
-            <span style="color: var(--text-dim); font-size: 10px;">Declarado pelo registrante</span>
-          </div>
-        </div>
-        <div class="author-pct">20%</div>
+      <div id="authorsContainer">
+        <!-- preenchido via JS -->
       </div>
     </div>
 
@@ -885,17 +843,17 @@
 
       <div class="hash-box">
         <div class="hash-label">Hash SHA-256 do arquivo original</div>
-        <div class="hash-value">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</div>
+        <div class="hash-value" id="hashSha256">-</div>
       </div>
 
       <div class="hash-box">
         <div class="hash-label">Identificador único da transação</div>
-        <div class="hash-value">A1B2C3D4E5F6789012345678901234ABCDEF0123456789</div>
+        <div class="hash-value" id="hashTx">-</div>
       </div>
 
       <div class="hash-box">
         <div class="hash-label">Endereço permanente do arquivo</div>
-        <div class="hash-value">ipfs://QmX7Y8Z9A1B2C3D4E5F6G7H8I9J0</div>
+        <div class="hash-value" id="hashIpfs">-</div>
       </div>
     </div>
 
@@ -961,56 +919,136 @@
 </footer>
 
 <script>
-  // Pega o código da URL (formato: /verificar/CODIGO ou ?codigo=CODIGO)
+  const SUPABASE_URL = 'https://vysrszsttlgpbvhzdwye.supabase.co';
+
   function getCodigoFromURL() {
-    // Tenta pegar de /verificar/CODIGO
     const pathMatch = window.location.pathname.match(/\/verificar\/([^\/\?#]+)/);
     if (pathMatch) return pathMatch[1];
-
-    // Tenta pegar de ?codigo=CODIGO
     const params = new URLSearchParams(window.location.search);
     const codigo = params.get('codigo') || params.get('c') || params.get('tx');
     if (codigo) return codigo;
-
     return null;
   }
 
-  // Mostra a tela certa ao carregar
-  window.addEventListener('DOMContentLoaded', () => {
-    const codigo = getCodigoFromURL();
+  function escapeHtml(s) {
+    return String(s || '').replace(/[&<>"']/g, (m) => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    })[m]);
+  }
 
-    if (codigo) {
-      // Tem código — mostra o certificado (demonstração por enquanto)
-      document.getElementById('searchScreen').style.display = 'none';
-      document.getElementById('certificateScreen').style.display = 'block';
+  function formatDateBR(iso) {
+    if (!iso) return '-';
+    const d = new Date(iso);
+    return d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+  }
 
-      // Atualiza o código mostrado
-      const displayElement = document.getElementById('codigoDisplay');
-      if (displayElement) {
-        displayElement.textContent = codigo;
+  function formatTimeBR(iso) {
+    if (!iso) return '-';
+    const d = new Date(iso);
+    return d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'America/Sao_Paulo' }) + ' · UTC-3';
+  }
+
+  function showSearchScreen() {
+    document.getElementById('searchScreen').style.display = 'flex';
+    document.getElementById('certificateScreen').style.display = 'none';
+  }
+
+  function showCertificateScreen() {
+    document.getElementById('searchScreen').style.display = 'none';
+    document.getElementById('certificateScreen').style.display = 'block';
+  }
+
+  function showNotFound(codigo) {
+    window.location.href = '/certificado-nao-encontrado.html?codigo=' + encodeURIComponent(codigo || '');
+  }
+
+  async function loadCertificate(codigo) {
+    try {
+      const url = SUPABASE_URL + '/functions/v1/verify-certificate?tx=' + encodeURIComponent(codigo);
+      const resp = await fetch(url);
+
+      if (resp.status === 404) {
+        const url2 = SUPABASE_URL + '/functions/v1/verify-certificate?id=' + encodeURIComponent(codigo);
+        const resp2 = await fetch(url2);
+        if (resp2.status === 404) { showNotFound(codigo); return; }
+        const data2 = await resp2.json();
+        if (!data2.found) { showNotFound(codigo); return; }
+        renderCertificate(data2.registration, codigo);
+        return;
       }
 
-      // Atualiza o título da página
-      document.title = `Verificação: ${codigo.substring(0, 12)}... — Sou Cifras`;
+      if (!resp.ok) { showNotFound(codigo); return; }
+
+      const data = await resp.json();
+      if (!data.found) { showNotFound(codigo); return; }
+
+      renderCertificate(data.registration, codigo);
+    } catch (err) {
+      console.error('Fetch error:', err);
+      showNotFound(codigo);
+    }
+  }
+
+  function renderCertificate(reg, codigo) {
+    document.title = 'Verificação: ' + reg.title + ' — Sou Cifras';
+
+    document.getElementById('codigoDisplay').textContent = codigo.length > 24
+      ? codigo.substring(0, 16) + '…' + codigo.substring(codigo.length - 8)
+      : codigo;
+
+    document.getElementById('certType').textContent = reg.type_label || reg.type || '-';
+    document.getElementById('certTitle').textContent = reg.title || '-';
+    document.getElementById('certPais').textContent = reg.country || '-';
+
+    const ts = reg.minted_at || reg.paid_at || reg.created_at;
+    document.getElementById('certData').textContent = formatDateBR(ts);
+    document.getElementById('certHora').textContent = formatTimeBR(ts);
+
+    const container = document.getElementById('authorsContainer');
+    container.innerHTML = '';
+    (reg.authors || []).forEach((a, idx) => {
+      const isMain = idx === 0;
+      const roleLabel = isMain ? 'Registrante' : 'Co-autor';
+      const roleClass = isMain ? 'role-main' : 'role-co';
+      const html = '<div class="author">' +
+        '<div class="author-info">' +
+          '<h4>' + escapeHtml(a.name) + ' <span class="author-role ' + roleClass + '">' + roleLabel + '</span></h4>' +
+          '<div class="author-meta">' +
+            '<span>Doc: ' + escapeHtml(a.document_masked) + '</span>' +
+            '<span>' + escapeHtml(a.country === 'BR' ? 'Brasil' : a.country) + '</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="author-pct">' + escapeHtml(a.percentage) + '%</div>' +
+      '</div>';
+      container.insertAdjacentHTML('beforeend', html);
+    });
+
+    document.getElementById('hashSha256').textContent = reg.file_hash_sha256 || '-';
+    document.getElementById('hashTx').textContent = reg.tx_hash || '-';
+    document.getElementById('hashIpfs').textContent = reg.file_ipfs_cid
+      ? ('ipfs://' + reg.file_ipfs_cid)
+      : 'Não disponivel';
+
+    showCertificateScreen();
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const codigo = getCodigoFromURL();
+    if (codigo) {
+      loadCertificate(codigo);
     } else {
-      // Sem código — mostra a busca
-      document.getElementById('searchScreen').style.display = 'flex';
-      document.getElementById('certificateScreen').style.display = 'none';
+      showSearchScreen();
     }
   });
 
-  // Processa o formulário de busca
   function verificarCodigo(event) {
     event.preventDefault();
     const codigo = document.getElementById('codigoInput').value.trim();
-
     if (!codigo) {
       alert('Por favor, cole o código de verificação');
       return false;
     }
-
-    // Redireciona para URL com código
-    window.location.href = `/verificacao.html?codigo=${encodeURIComponent(codigo)}`;
+    window.location.href = '/verificacao.html?tx=' + encodeURIComponent(codigo);
     return false;
   }
 </script>
