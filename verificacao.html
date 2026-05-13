@@ -925,7 +925,7 @@
     const pathMatch = window.location.pathname.match(/\/verificar\/([^\/\?#]+)/);
     if (pathMatch) return pathMatch[1];
     const params = new URLSearchParams(window.location.search);
-    const codigo = params.get('codigo') || params.get('c') || params.get('tx');
+    const codigo = params.get('codigo') || params.get('c') || params.get('tx') || params.get('id');
     if (codigo) return codigo;
     return null;
   }
