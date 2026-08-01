@@ -4,7 +4,7 @@
   "rewrites": [
     {
       "source": "/verificar/:codigo",
-      "destination": "/verificacao.html?tx=:codigo"
+      "destination": "/verificacao?tx=:codigo"
     }
   ]
 }
