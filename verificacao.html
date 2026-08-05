@@ -863,11 +863,11 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
         Baixar certificado completo
       </a>
-      <a href="#" class="action action-secondary">
+      <a href="#" id="btnCompartilhar" class="action action-secondary">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
         Compartilhar verificação
       </a>
-      <a href="#" class="action action-secondary">
+      <a href="#" id="btnVerNaRede" class="action action-secondary">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
         Ver na rede descentralizada
       </a>
@@ -1025,6 +1025,50 @@
 
     document.getElementById('hashSha256').textContent = reg.file_hash_sha256 || '-';
     document.getElementById('hashTx').textContent = reg.tx_hash || '-';
+
+    // ===== OS DOIS BOTOES DE ACAO =====
+    // Ate aqui eles tinham href='#' e nao levavam a lugar nenhum,
+    // embora o certificado prometa verificacao independente.
+    const btnRede = document.getElementById('btnVerNaRede');
+    if (btnRede) {
+      if (reg.tx_hash) {
+        // Enquanto houver registros antigos de teste no banco, o
+        // link precisa apontar para o explorador certo de cada
+        // rede. A mainnet ja passou de 100 milhoes de blocos; a
+        // de teste esta na casa dos 19 milhoes.
+        const bloco = Number(reg.ledger_index || 0);
+        const ehTeste = bloco > 0 && bloco < 100000000;
+        btnRede.href = ehTeste
+          ? 'https://testnet.xrpl.org/transactions/' + reg.tx_hash
+          : 'https://xrpscan.com/tx/' + reg.tx_hash;
+        btnRede.target = '_blank';
+        btnRede.rel = 'noopener noreferrer';
+        btnRede.style.display = '';
+      } else {
+        btnRede.style.display = 'none';
+      }
+    }
+
+    const btnShare = document.getElementById('btnCompartilhar');
+    if (btnShare) {
+      btnShare.onclick = function (e) {
+        e.preventDefault();
+        const url = window.location.href;
+        if (navigator.share) {
+          navigator.share({
+            title: 'Verificacao Sou Cifras',
+            text: 'Certificado de registro autoral verificado',
+            url: url,
+          }).catch(function () {});
+        } else if (navigator.clipboard) {
+          navigator.clipboard.writeText(url).then(function () {
+            const antes = btnShare.textContent;
+            btnShare.textContent = 'Link copiado';
+            setTimeout(function () { btnShare.textContent = antes; }, 2000);
+          }).catch(function () {});
+        }
+      };
+    }
     document.getElementById('hashIpfs').textContent = reg.file_ipfs_cid
       ? ('ipfs://' + reg.file_ipfs_cid)
       : 'Não disponivel';
