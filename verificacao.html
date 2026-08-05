@@ -438,6 +438,38 @@
     line-height: 1.5;
   }
 
+  /* Cartao da confirmacao na rede publica (tres estados) */
+  .onchain-card {
+    padding: 20px 24px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg);
+    margin-bottom: 24px;
+  }
+  .onchain-ok { border-color: rgba(34, 197, 94, 0.4); background: var(--green-bg); }
+  .onchain-warn { border-color: rgba(239, 68, 68, 0.5); background: var(--red-bg); }
+  .onchain-title {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 8px;
+  }
+  .onchain-ok .onchain-title { color: var(--green); }
+  .onchain-warn .onchain-title { color: var(--red); }
+  .onchain-off .onchain-title { color: var(--text-dim); }
+  .onchain-text { font-size: 14px; color: var(--text-dim); line-height: 1.65; }
+  .onchain-meta {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    word-break: break-all;
+  }
+
   /* Action buttons */
   .actions {
     display: flex;
@@ -857,6 +889,9 @@
       </div>
     </div>
 
+    <!-- Confirmação na rede pública (preenchido via JS com o bloco onchain da Edge) -->
+    <div id="onchainCard" style="display:none"></div>
+
     <!-- Ações -->
     <div class="actions">
       <a href="#" class="action action-primary">
@@ -973,7 +1008,7 @@
         if (resp2.status === 404) { showNotFound(codigo); return; }
         const data2 = await resp2.json();
         if (!data2.found) { showNotFound(codigo); return; }
-        renderCertificate(data2.registration, codigo);
+        renderCertificate(data2.registration, codigo, data2.onchain);
         return;
       }
 
@@ -982,14 +1017,14 @@
       const data = await resp.json();
       if (!data.found) { showNotFound(codigo); return; }
 
-      renderCertificate(data.registration, codigo);
+      renderCertificate(data.registration, codigo, data.onchain);
     } catch (err) {
       console.error('Fetch error:', err);
       showNotFound(codigo);
     }
   }
 
-  function renderCertificate(reg, codigo) {
+  function renderCertificate(reg, codigo, onchain) {
     document.title = 'Verificação: ' + reg.title + ' — Sou Cifras';
 
     document.getElementById('codigoDisplay').textContent = codigo.length > 24
@@ -1072,6 +1107,48 @@
     document.getElementById('hashIpfs').textContent = reg.file_ipfs_cid
       ? ('ipfs://' + reg.file_ipfs_cid)
       : 'Não disponivel';
+
+    // ===== CONFIRMACAO NA REDE PUBLICA =====
+    // A Edge consulta a XRPL a cada verificacao e devolve o bloco
+    // "onchain"; ate 05/08 a tela ignorava. Tres estados: confirmado
+    // (verde), rede indisponivel (neutro) e divergencia de hash
+    // (vermelho — nao deveria existir; se existir, denunciamos).
+    var ocCard = document.getElementById("onchainCard");
+    if (ocCard) {
+      var oc = onchain || null;
+      var ocHtml = "";
+      if (oc && oc.confirmado) {
+        if (oc.hash_confere === false) {
+          ocHtml =
+            "<div class=\"onchain-card onchain-warn\">" +
+              "<div class=\"onchain-title\">Atenção: divergência com a rede pública</div>" +
+              "<div class=\"onchain-text\">A transação existe na rede, mas o hash gravado nela não corresponde ao hash do arquivo deste registro. Entre em contato: contato@soucifras.com.br</div>" +
+            "</div>";
+        } else {
+          var ocMeta = "";
+          if (oc.rede) ocMeta += "<span>Rede: " + escapeHtml(String(oc.rede)) + "</span>";
+          var ocBloco = oc.bloco || oc.ledger_index;
+          if (ocBloco) ocMeta += "<span>Bloco: " + escapeHtml(String(ocBloco)) + "</span>";
+          if (oc.conta) ocMeta += "<span>Conta emissora: " + escapeHtml(String(oc.conta)) + "</span>";
+          ocHtml =
+            "<div class=\"onchain-card onchain-ok\">" +
+              "<div class=\"onchain-title\">Confirmado na rede pública</div>" +
+              "<div class=\"onchain-text\">Esta confirmação não vem de nós: a transação foi localizada e está validada na rede descentralizada" +
+              (oc.hash_confere === true ? ", e o hash gravado nela é idêntico ao hash do arquivo registrado" : "") +
+              ".</div>" +
+              (ocMeta ? "<div class=\"onchain-meta\">" + ocMeta + "</div>" : "") +
+            "</div>";
+        }
+      } else {
+        ocHtml =
+          "<div class=\"onchain-card onchain-off\">" +
+            "<div class=\"onchain-title\">Rede pública indisponível no momento</div>" +
+            "<div class=\"onchain-text\">Não foi possível consultar a rede descentralizada agora. Os dados acima vêm dos registros da Sou Cifras — recarregue a página em instantes para a confirmação independente.</div>" +
+          "</div>";
+      }
+      ocCard.innerHTML = ocHtml;
+      ocCard.style.display = "";
+    }
 
     showCertificateScreen();
   }
