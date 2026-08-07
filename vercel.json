@@ -3,6 +3,10 @@
   "trailingSlash": false,
   "rewrites": [
     {
+      "source": "/certificado/:tx",
+      "destination": "https://vysrszsttlgpbvhzdwye.supabase.co/functions/v1/certificado-publico?tx=:tx"
+    },
+    {
       "source": "/verificar/:codigo",
       "destination": "/verificacao?tx=:codigo"
     }
