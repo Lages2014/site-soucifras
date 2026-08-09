@@ -596,7 +596,7 @@
 
       // Tratar erros conhecidos
       if (data.code === "expired") {
-        showError("Convite expirado", "Este convite expirou (validade de 7 dias).");
+        showError("Convite expirado", "Este convite nao e mais valido. Peca a quem registrou a obra para incluir voce de novo no registro.");
         return;
       }
       if (data.code === "invalid") {
