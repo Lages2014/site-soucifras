@@ -1031,6 +1031,30 @@
       ? codigo.substring(0, 16) + '…' + codigo.substring(codigo.length - 8)
       : codigo;
 
+    // ===== AVISO DE VERSAO (12/08) =====
+    // Quem baixou o PDF com ressalva continua com ele na maquina.
+    // O aviso vem ANTES do cartao do certificado de proposito:
+    // quem abre a verificacao com o papel na mao precisa ver isto
+    // antes de qualquer outra informacao.
+    if (reg.documento_reemitido) {
+      const avisoVersao = document.createElement('div');
+      avisoVersao.setAttribute('data-aviso-versao', '1');
+      avisoVersao.style.cssText = 'margin:0 auto 18px;max-width:900px;padding:14px 18px;border:1px solid #C9A44E;border-left:4px solid #E4B443;border-radius:8px;background:rgba(228,180,67,0.08);font-size:14px;line-height:1.55;';
+      avisoVersao.innerHTML =
+        '<strong style="color:#E4B443;">Este certificado foi reemitido em ' +
+        escapeHtml(formatDateBR(reg.documento_versao_em)) + '.</strong><br>' +
+        'Se o documento em m\u00e3os tem data anterior, ele foi substitu\u00eddo por esta vers\u00e3o. ' +
+        'A data do registro N\u00c3O muda na reemiss\u00e3o: troca-se o documento, nunca a prova.';
+      const alvoAviso = document.getElementById('codigoDisplay');
+      const caixaAviso = alvoAviso
+        ? (alvoAviso.closest('section') || alvoAviso.closest('main') || alvoAviso.parentElement)
+        : null;
+      if (caixaAviso && caixaAviso.parentElement) {
+        caixaAviso.parentElement.insertBefore(avisoVersao, caixaAviso);
+      } else {
+        document.body.insertBefore(avisoVersao, document.body.firstChild);
+      }
+    }
     document.getElementById('certType').textContent = reg.type_label || reg.type || '-';
     document.getElementById('certTitle').textContent = reg.title || '-';
     document.getElementById('certPais').textContent = reg.country || '-';
